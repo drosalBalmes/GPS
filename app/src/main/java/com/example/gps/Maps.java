@@ -10,6 +10,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -32,7 +33,8 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     private FusedLocationProviderClient fusedLocationClient;
 
-    LatLng marca;
+    public LatLng marca;
+    public LatLng marca2;
     private ActivityMapsBinding binding;
 
     @Override
@@ -43,8 +45,10 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        marca = new LatLng(4,4);
-        getCoords();
+        marca = new LatLng(2,2);
+        //getCoords();
+        Toast.makeText(getApplicationContext(), "Latitude: " + marca.latitude + ", Longitude: " + marca.longitude, Toast.LENGTH_LONG).show();
+
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -64,7 +68,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        //getCoords();
+        getCoords();
 
         //Toast.makeText(getApplicationContext(), "Latitude: " + marca.latitude + ", Longitude: " + marca.longitude, Toast.LENGTH_LONG).show();
 
@@ -114,8 +118,8 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
 
                     marca = new LatLng(location.getLatitude(),location.getLongitude());
 
-                    Toast.makeText(getApplicationContext(), "Latitude: " + marca.latitude + ", Longitude: " + marca.longitude, Toast.LENGTH_LONG).show();
 
+                    //Toast.makeText(getApplicationContext(), "Latitude: " + marca.latitude + ", Longitude: " + marca.longitude, Toast.LENGTH_LONG).show();
                     //Toast.makeText(getApplicationContext(), "Latitude: " + location.getLatitude() + ", Longitude: " + location.getLongitude(), Toast.LENGTH_LONG).show();
                     //lat = location.getLatitude();
                     //lng = location.getLongitude();
@@ -127,8 +131,8 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
 
     }
 
-
-
-
+    public void setMarca(LatLng marca) {
+        this.marca = marca;
+    }
 }
 
