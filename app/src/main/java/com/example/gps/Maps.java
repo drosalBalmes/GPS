@@ -34,7 +34,6 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
     private FusedLocationProviderClient fusedLocationClient;
 
     public LatLng marca;
-    public LatLng marca2;
     private ActivityMapsBinding binding;
 
     @Override
@@ -73,11 +72,14 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
         //Toast.makeText(getApplicationContext(), "Latitude: " + marca.latitude + ", Longitude: " + marca.longitude, Toast.LENGTH_LONG).show();
 
         mMap = googleMap;
-
+        LatLng marca2;
+        double lat = getIntent().getDoubleExtra("Latitude",0);
+        double lng = getIntent().getDoubleExtra("Longitude",0);
+        marca2 = new LatLng(lat,lng);
         // Add a marker in the actual pos and move the camera
 
-        mMap.addMarker(new MarkerOptions().position(marca).title((String) getTitle()));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(marca));
+        mMap.addMarker(new MarkerOptions().position(marca2).title((String) getTitle()));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(marca2));
     }
 
     public StringBuilder getTitle(LatLng pob) throws IOException {

@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -60,14 +62,22 @@ public class Coords extends AppCompatActivity {
             return;
         }
         fusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+
             @Override
             public void onSuccess(Location location) {
                 // Got last known location. In some rare situations this can be null.
                 if(location != null){
-
+                    Log.i("auuuu", " aaaaaa ");
                     Toast.makeText(getApplicationContext(),"Latitude: " + location.getLatitude() + ", Longitude: " + location.getLongitude(), Toast.LENGTH_LONG).show();
+                    Log.i("auuuu",location.getLatitude() + " , " + location.getLongitude());
                     tvLat.setText(String.valueOf( location.getLatitude()));
                     tvLng.setText(String.valueOf( location.getLongitude()));
+
+                    //testing
+                    Intent intent = new Intent(Coords.this,Maps.class);
+                    intent.putExtra("Latitude",(double) location.getLatitude());
+                    intent.putExtra("Longitude",(double) location.getLongitude());
+                    startActivity(intent);
                 }
             }
         });
